@@ -1,22 +1,22 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load staticfiles %}
-{% block metadescription%}
-    {% if category %}
-        {{ category.description|truncatewords:155 }}
-    {% else %}
-        Welcome to the cushion store where you can buy comfy and awesome cushions.
-    {% endif %}
+{% block metadescription %}
+	{% if category %}
+		{{ category.description|truncatewords:155 }}
+	{% else %}
+		Welcome to the cushion store where you can buy comfy and awesome cushions.
+	{% endif %}
 {% endblock %}
 {% block title %}
-    {% if category %}
-        {{ category.name }} - Perfect Cushion Store
-    {% else %}
-        See Our Cushion Collection - Perfect Cushion Store
-    {% endif %}
+	{% if category %}
+		{{ category.name }} - The Perfect Cushion Store
+	{% else %}
+		Our Cushion Collection - The Perfect Cushion Store
+	{% endif %}
 {% endblock %}
 {% block content %}
-    <!--Breadcrumb navigation-->
-    {% if category %}
+	<!--Breadcrumb navigation-->
+	  {% if category %}
       <div>
           <div>
               <p><a href="{% url 'shop:allProdCat' %}">Our Product Collection</a> | {{ category.name }}</p>
@@ -44,15 +44,17 @@
     <div>
         <div>
           {% for product in products %}
-           <div>
-           <div>
-           <a href=""><img src="{% if product.image %} {‌{ product.image.url }} {% else %} {% static 'img/noimage.png' %}{% endif %}" alt="{‌{product.name}}"></a>
-           <div>
-           <h1>{‌{product.name}}</h1>
-           <p>£{‌{product.price}}</p>
-           </div>
-           </div>
-           </div>
+					<div>
+					<img src="{% if product.image %}{% else %}{% static 'img/notimage.png' %}{% endif %}" alt="">
+					<div>
+						<a href="{{product.get_url}}"><img src="{{product.image.url}}" alt="{{ product.name }}"></a>
+					<h4>{{product.name}}</h4>
+					<p> $ {{product.price}} </p>
+					<br/>
+
+					</div>
+
+
            {% endfor %}
           </div>
       </div>
